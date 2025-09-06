@@ -20,6 +20,7 @@ export class HelpCommand extends BaseCommand {
       // This would be injected in a real implementation
       const commands = [
         { name: 'help', description: 'Show this help message' },
+        { name: 'version', description: 'Show version and project information' },
         { name: 'clear', description: 'Clear the terminal screen' },
         { name: 'pwd', description: 'Print working directory' },
         { name: 'ls', description: 'List directory contents' },
@@ -28,9 +29,9 @@ export class HelpCommand extends BaseCommand {
         { name: 'touch', description: 'Create empty file' },
         { name: 'cat', description: 'Display file contents' },
         { name: 'rm', description: 'Remove files or directories' },
-        { name: 'cp', description: 'Copy files or directories' },
-        { name: 'mv', description: 'Move/rename files or directories' },
         { name: 'echo', description: 'Display text' },
+        { name: 'nano', description: 'Simple file editor (see nano --help)' },
+        { name: 'bash', description: 'Execute bash scripts' },
         { name: 'whoami', description: 'Display current user' },
         { name: 'hostname', description: 'Display system hostname' },
         { name: 'date', description: 'Display current date and time' },
@@ -41,6 +42,12 @@ export class HelpCommand extends BaseCommand {
         output.push(`  ${cmd.name.padEnd(12)} - ${cmd.description}`);
       });
       
+      output.push('');
+      output.push('Special features:');
+      output.push('  • File redirection: echo "text" > file.txt');
+      output.push('  • Script execution: ./script.sh or bash script.sh');
+      output.push('');
+      output.push('Aliases available: about, version, -v, --version');
       output.push('');
       output.push('Type "help <command>" for detailed information about a specific command.');
       

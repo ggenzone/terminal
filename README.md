@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="public/terminal.png" alt="H-Terminal Logo" width="200" />
+</div>
+
 # Terminal 🚀
 
 A modern, web-based terminal emulator that simulates a complete bash environment with a sleek dark theme. Built with TypeScript, Vite, and modern web technologies.

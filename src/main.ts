@@ -25,6 +25,7 @@ import {
 import { BashCommand } from './commands/BashCommand.js';
 import { ExecuteCommand } from './commands/ExecuteCommand.js';
 import { NanoCommand, NanoWriteCommand, NanoAppendCommand, NanoReadCommand } from './commands/NanoCommand.js';
+import { VersionCommand } from './commands/VersionCommand.js';
 
 import type { ITerminalConfig, ICommandContext } from './types/interfaces.js';
 
@@ -108,7 +109,8 @@ class HTerminal {
       new NanoCommand(),
       new NanoWriteCommand(),
       new NanoAppendCommand(),
-      new NanoReadCommand()
+      new NanoReadCommand(),
+      new VersionCommand()
     ];
 
     commands.forEach(command => {
@@ -178,10 +180,31 @@ class HTerminal {
   }
 
   private showWelcome(): void {
-    this.terminalIO.addOutput('Welcome to H-Terminal', 'success-line');
-    this.terminalIO.addOutput('A modern web-based terminal emulator', 'success-line');
-    this.terminalIO.addOutput('Type "help" to see available commands', 'success-line');
-    this.terminalIO.addOutput('', 'output-line');
+    const output = [
+      '╭─────────────────────────────────────────────────╮',
+      '│              H-Terminal v1.0.0                  │',
+      '├─────────────────────────────────────────────────┤',
+      '│                                                 │',
+      '| 🚀 Welcome to H-Terminal!                       |',
+      '| 📟 A modern web-based terminal emulator         |',
+      '| ⚡ Built with TypeScript, powered by BSD spirit  |',
+      '|                                                 |',
+      '├─────────────────────────────────────────────────┤',
+      '| 💡 Quick start:                                 |',
+      '|   • Type "help" to see all commands             |',
+      '|   • Type "version" for project info             |',
+      '|   • Try "echo \\"Hello World\\" > file.txt"     |',
+      '|                                                 |',
+      '| 🔗 GitHub: https://github.com/ggenzone/terminal |',
+      '╰─────────────────────────────────────────────────╯',
+      '',
+      ''
+    ];
+    
+    output.forEach(line => {
+      this.terminalIO.addOutput(line, line.includes('🚀') || line.includes('📟') || line.includes('⚡') ? 'success-line' : 'output-line');
+    });
+    
     this.updatePrompt();
     this.terminalIO.focus();
   }
