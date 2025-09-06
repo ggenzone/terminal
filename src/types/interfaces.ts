@@ -49,6 +49,9 @@ export interface ICommandResult {
   output?: string[];
   error?: string;
   exitCode: number;
+  // For redirection support
+  redirectToFile?: string;
+  redirectMode?: 'write' | 'append';
 }
 
 export interface ICommand {
@@ -65,7 +68,7 @@ export interface ICommandProcessor {
   executeCommand(input: string, context: Omit<ICommandContext, 'args' | 'flags'>): Promise<ICommandResult>;
   getCommand(name: string): ICommand | undefined;
   getAllCommands(): ICommand[];
-  parseInput(input: string): { command: string; args: string[]; flags: Map<string, string | boolean> };
+  parseInput(input: string): { command: string; args: string[]; flags: Map<string, string | boolean>; redirectToFile?: string; redirectMode?: 'write' | 'append' };
 }
 
 export interface ITerminalHistory {

@@ -22,6 +22,9 @@ import {
   CatCommand, 
   RmCommand 
 } from './commands/FileCommands.js';
+import { BashCommand } from './commands/BashCommand.js';
+import { ExecuteCommand } from './commands/ExecuteCommand.js';
+import { NanoCommand, NanoWriteCommand, NanoAppendCommand, NanoReadCommand } from './commands/NanoCommand.js';
 
 import type { ITerminalConfig, ICommandContext } from './types/interfaces.js';
 
@@ -99,7 +102,13 @@ class HTerminal {
       new MkdirCommand(),
       new TouchCommand(),
       new CatCommand(),
-      new RmCommand()
+      new RmCommand(),
+      new BashCommand(),
+      new ExecuteCommand(),
+      new NanoCommand(),
+      new NanoWriteCommand(),
+      new NanoAppendCommand(),
+      new NanoReadCommand()
     ];
 
     commands.forEach(command => {
@@ -131,7 +140,7 @@ class HTerminal {
 
       // Display result
       if (result.output && result.output.length > 0) {
-        result.output.forEach(line => {
+        result.output.forEach((line: string) => {
           this.terminalIO.addOutput(line, 'output-line');
         });
       }
